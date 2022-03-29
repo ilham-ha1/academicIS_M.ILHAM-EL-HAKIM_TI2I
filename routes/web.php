@@ -20,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::resource('student',StudentController::class);
+Route::get('/search/', 'PostsController@search')->name('search');

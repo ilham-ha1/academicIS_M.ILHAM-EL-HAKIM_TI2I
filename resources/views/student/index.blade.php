@@ -9,26 +9,37 @@
             <a class="btn btn-success" href="{{ route('student.create') }}"> Input Student Data</a>
         </div>
         </div>
+        <form action="{{ route('search') }}" method="GET">
+            <input type="text" name="search" required/>
+            <button type="submit">Search</button>
+        </form>
     </div>
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
     @endif
+
     <table class="table table-bordered">
         <tr>
             <th>Nim</th>
             <th>Name</th>
             <th>Class</th>
             <th>Major</th>
+            <th>Address</th>
+            <th>Date of Birth</th>
             <th width="280px">Action</th>
         </tr>
+
+  
     @foreach ($student as $mhs)
         <tr>
             <td>{{ $mhs ->nim }}</td>
             <td>{{ $mhs ->name }}</td>
             <td>{{ $mhs ->class }}</td>
             <td>{{ $mhs ->major }}</td>
+            <td>{{ $mhs ->address }}</td>
+            <td>{{ $mhs ->dateof }}</td>
             <td>
             <form action="{{ route('student.destroy',['student'=>$mhs->nim]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('student.show',$mhs->nim) }}">Show</a>
@@ -38,7 +49,9 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
             </td>
-        </tr>
+        </tr>  
     @endforeach
     </table>
+    <h5>Pagination:</h5>
+        {{ $student->links() }}
     @endsection
