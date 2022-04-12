@@ -8,12 +8,10 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Nim: </b>{{$Student->nim}}</li>
-                    <li class="list-group-item"><b>Name: </b>{{$Student->name}}</li>
-                    <li class="list-group-item"><b>Class: </b>{{$Student->class}}</li>
-                    <li class="list-group-item"><b>Major: </b>{{$Student->major}}</li>
-                    <li class="list-group-item"><b>Address: </b>{{$Student->address}}</li>
-                    <li class="list-group-item"><b>Date of Birth: </b>{{$Student->dateof}}</li>
+                <li class="list-group-item"><b>Nim: </b>{{$Student->nim}}</li>
+                <li class="list-group-item"><b>Name: </b>{{$Student->name}}</li>
+                <li class="list-group-item"><b>Class: </b>{{$Student->class->class_name}}</li>
+                <li class="list-group-item"><b>Major: </b>{{$Student->major}}</li>
                 </ul>
             </div>
             <a class="btn btn-success mt-3" href="{{ route('student.index') }}">Back</a>
