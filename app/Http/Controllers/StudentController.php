@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClassModel;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\CourseStudentModel;
 //use DB;
 //use PhpParser\Builder\Class_;
 
@@ -145,4 +146,11 @@ class StudentController extends Controller
         Student::where('nim', $nim)->delete();
         return redirect()->route('student.index')-> with('success', 'Student Successfully Deleted');
     }
+
+    public function value($nim)
+    {
+        $value = Student::with('class','course')->find($nim);
+        return view('student.value',compact('value'));
+    }
+
 }

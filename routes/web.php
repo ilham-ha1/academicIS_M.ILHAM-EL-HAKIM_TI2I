@@ -21,5 +21,4 @@ Route::get('/', function () {
 
 Route::resource('student',StudentController::class);
 Route::get('/search/', 'PostsController@search')->name('search');
-Route::get('student/value/{nim}',[StudentController::class, 'value'])
-->name('student.value');
+Route::get('student/value/{nim}',[StudentController::class,'value'])->name('student.value');

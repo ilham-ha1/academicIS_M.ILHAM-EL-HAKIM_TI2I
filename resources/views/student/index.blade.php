@@ -37,7 +37,7 @@
     <tr>
         <td>{{ $mhs ->nim }}</td>
         <td>{{ $mhs ->name }}</td>
-        <td>{{ $mhs ->class->class_name }}</td>
+        <td>{{ $mhs ->class->class_name}}</td>
         <td>{{ $mhs ->major }}</td>
         <td>
             <form action="{{ route('student.destroy',['student'=>$mhs->nim]) }}" method="POST">
@@ -46,6 +46,7 @@
             @csrf
             @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
+                <a class="btn btn-warning" href="{{ route('student.value',$mhs->nim) }}">Value</a>
             </form>
         </td>
     </tr>

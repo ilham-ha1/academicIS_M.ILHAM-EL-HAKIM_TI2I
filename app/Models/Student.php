@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Student as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; //Model Eloquent
 use App\Models\ClassModel;
+use App\Models\CourseStudentModel;
 class Student extends Model // Model definition
 {
     use HasFactory;
@@ -27,6 +28,11 @@ class Student extends Model // Model definition
 
     public function class(){
         return $this->belongsTo(ClassModel::class);
+    }
+
+    public function course()
+    {
+        return $this->belongsToMany(CourseModel::class,'course_student','student_id','course_id')->withPivot('value');
     }
 
     public function scopeSearch($query, array $searching){
