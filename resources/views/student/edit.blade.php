@@ -40,6 +40,11 @@
                         <label for="Major">Major</label>
                         <input type="Major" name="Major" class="form-control" id="Major" value="{{ $Student->major }}" aria-describedby="Major" >
                     </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" name="Image" id="Image" value="{{$Student->image}}" aria-describedby="Image" >
+                        <img width="50px" src="{{asset('storage/'.$Student->image)}}">
+                    </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

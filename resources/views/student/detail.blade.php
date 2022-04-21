@@ -12,6 +12,7 @@
                 <li class="list-group-item"><b>Name: </b>{{$Student->name}}</li>
                 <li class="list-group-item"><b>Class: </b>{{$Student->class->class_name}}</li>
                 <li class="list-group-item"><b>Major: </b>{{$Student->major}}</li>
+                <li class="list-group-item"><b>Image: <br><img width="50px" src="{{asset('storage/'.$Student->image)}}"></b></li>
                 </ul>
             </div>
             <a class="btn btn-success mt-3" href="{{ route('student.index') }}">Back</a>

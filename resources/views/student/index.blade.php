@@ -14,6 +14,7 @@
     <p>{{ $message }}</p>
 </div>
 @endif
+
 <div class="row justify-content-center mb-3 mt-3">
     <div class="col-md-6">
         <form action="">
@@ -31,6 +32,7 @@
         <th>Name</th>
         <th>Class</th>
         <th>Major</th>
+        <th>Image</th>
         <th width="280px">Action</th>
     </tr>
 @foreach ($paginate as $mhs)
@@ -39,6 +41,7 @@
         <td>{{ $mhs ->name }}</td>
         <td>{{ $mhs ->class->class_name}}</td>
         <td>{{ $mhs ->major }}</td>
+        <td><img  width="50px" src="{{asset('storage/'.$mhs->image) }}"></td>
         <td>
             <form action="{{ route('student.destroy',['student'=>$mhs->nim]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('student.show',$mhs->nim) }}">Show</a>

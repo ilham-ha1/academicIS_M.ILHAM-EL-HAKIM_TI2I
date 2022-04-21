@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CourseStudentModel;
 //use DB;
 //use PhpParser\Builder\Class_;
+use PDF;
 
 class StudentController extends Controller
 {
@@ -15,7 +16,23 @@ class StudentController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+    public function show($nim)
+    {
+        // displays detailed data by finding / by Student Nim
+        $Student = Student::with('class')->find($nim);
+
+        return view('student.detail',['Student' => $Student]);
+
+    }
+    public function print_pdf($nim){
+
+        $Student =Student::findOrFail($nim);
+        $pdf = PDF::loadview('student.student_pdf',['Student'=>$Student]);
+        return $pdf->stream();
+    }
+
     public function index()
     {
         $student = Student::with('class')->get();
@@ -35,7 +52,8 @@ class StudentController extends Controller
     public function create()
     {
         $class = ClassModel::all(); //get data from class table
-        return view('student.create',['class' => $class]);
+        $student = Student::with('class')->get();
+        return view('student.create',['class' => $class , 'student' =>$student]);
     }
 
     /**
@@ -52,12 +70,15 @@ class StudentController extends Controller
             'Name' => 'required',
             'Class' => 'required',  //why? Class_id?
             'Major' => 'required',
+            'Image' => 'required',
         ]);
         
         $student = new Student;
         $student->nim = $request->get('Nim');
         $student->name = $request->get('Name');
         $student->major = $request->get('Major');
+        $student->image = $request->get('Image');
+
          
         $class = new ClassModel;
         $class->id = $request->get('Class');
@@ -76,14 +97,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nim)
-    {
-        // displays detailed data by finding / by Student Nim
-        $Student = Student::with('class')->where('nim', $nim)->first();
-
-        return view('student.detail',['Student' => $Student]);
-
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -95,8 +109,9 @@ class StudentController extends Controller
     {
         // displays detail data by finding based on Student Nim for editing
         $Student = Student::with('class')->where('nim',$nim)->first();
-        $class = ClassModel::all();
-        return view('student.edit',compact('Student','class'));
+        $Class = ClassModel::all();
+        return view('student.edit',['Student'=>$Student
+                                    ,'class'=>$Class]);
     }
 
     /**
@@ -114,12 +129,14 @@ class StudentController extends Controller
             'Name'=>'required',
             'Class'=>'required',
             'Major'=>'required',
+            'Image'=>'required',
         ]);
 
         $student = Student::with('class')->where('nim',$nim)->first();
         $student->nim = $request->get('Nim');
         $student->name = $request->get('Name');
         $student->major = $request->get('Major');
+        $student->image = $request->get('Image');
 
         $class = new ClassModel;
         $class->id = $request->get('Class');
@@ -150,7 +167,7 @@ class StudentController extends Controller
     public function value($nim)
     {
         $value = Student::with('class','course')->find($nim);
-        return view('student.value',compact('value'));
+        return view('student.value',['value'=>$value]);
     }
 
 }

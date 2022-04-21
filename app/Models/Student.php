@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\Student as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; //Model Eloquent
 use App\Models\ClassModel;
-use App\Models\CourseStudentModel;
 class Student extends Model // Model definition
 {
     use HasFactory;
@@ -24,6 +23,7 @@ class Student extends Model // Model definition
         'name',
         'class_id',
         'major',
+        'image',
     ];
 
     public function class(){

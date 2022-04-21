@@ -7,11 +7,17 @@
             <br>
             <h1 align="center">Kartu Hasil Studi(KHS)</h1>
         </div>
+       
         <div class="float-left my-2">
             <p><strong>Name: </strong>{{$value->name}}</p>
             <p><strong>NIM: </strong>{{$value->nim}}</p>
             <p><strong>Class: </strong>{{$value->class->class_name}}</p>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div style="margin:0px 0px 0px 70px;">
+        <a class="btn btn-success" href="{{ route('print_pdf',$value->nim) }}">Print PDF</a>
     </div>
 </div>
 
